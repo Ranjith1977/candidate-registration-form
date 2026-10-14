@@ -1,6 +1,5 @@
 .venv/
-.env
-credentials.json
-token.json
+secrets/*
+!secrets/.env.example
 __pycache__/
 .ipynb_checkpoints/

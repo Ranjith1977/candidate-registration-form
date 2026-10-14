@@ -52,19 +52,22 @@ Recruitment teams often receive multiple candidate applications from a form or r
 
 ```text
 Email_Automation/
-├── Email_Automation_Agent.ipynb
-├── .env
 ├── .gitignore
-├── credentials.json
-├── requirements.txt
-├── token.json
 ├── README.md
+├── requirements.txt
+├── notebooks/
+│   └── Email_Automation_Agent.ipynb
 ├── screenshots/
 │   ├── candidate-registration-form.png
 │   ├── google-form-responses.png
 │   ├── email-status-tracking.png
 │   └── automation-logs.png
-└── ...
+├── secrets/
+│   ├── .env.example
+│   ├── .env
+│   ├── credentials.json
+│   └── token.json
+└── .venv/
 ```
 
 ## Screenshots
@@ -119,24 +122,26 @@ pip install -r requirements.txt
 pip install langchain langchain-ollama
 ```
 
-### 4. Configure environment variables
+### 4. Configure environment variables and credentials
 
-Create a `.env` file in the project root with:
+Copy the sample file and fill in your Gmail details:
+
+```bash
+copy secrets\.env.example secrets\.env
+```
+
+Then update `secrets/.env` with:
 
 ```env
 GMAIL_ADDRESS=yourgmail@gmail.com
 GMAIL_APP_PASSWORD=your_app_password
 ```
 
+Place your Google OAuth `credentials.json` file inside `secrets/` and run the notebook once to generate `secrets/token.json`.
+
 Make sure the Gmail account has an App Password enabled if using Gmail 2-Step Verification.
 
-### 5. Set up Google credentials
-
-- Download your Google OAuth `credentials.json` file.
-- Run the notebook once so it can generate `token.json` for authorized access.
-- Replace the sample Google Sheet URL in the notebook with your real Sheet URL.
-
-### 6. Install Ollama and pull the model
+### 5. Install Ollama and pull the model
 
 This project uses the model `qwen3:1.7b`.
 
@@ -144,9 +149,9 @@ This project uses the model `qwen3:1.7b`.
 ollama pull qwen3:1.7b
 ```
 
-### 7. Run the notebook
+### 6. Run the notebook
 
-Open `Email_Automation_Agent.ipynb` in Jupyter Notebook or VS Code and run the cells in order.
+Open `notebooks/Email_Automation_Agent.ipynb` in Jupyter Notebook or VS Code and run the cells in order.
 
 The automation will continue polling the worksheet every 30 seconds until you stop it.
 
@@ -155,7 +160,7 @@ The automation will continue polling the worksheet every 30 seconds until you st
 - `SPREADSHEET_URL` must point to your live Google Sheet.
 - The script adds an `Email Status` column automatically if it does not exist.
 - Do not share your Gmail app password or Google credentials.
-- Keep `credentials.json` and `token.json` secure.
+- Keep all files inside `secrets/` protected and never commit them to version control.
 
 ## Potential improvements
 
