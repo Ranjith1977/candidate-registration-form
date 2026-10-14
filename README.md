@@ -1,4 +1,3 @@
-
 # Candidate Email Automation
 
 This project automates the first step of the hiring process by monitoring a Google Form, validating candidate submissions, and sending a professional application acknowledgment email through Gmail.
@@ -172,4 +171,4 @@ The automation will continue polling the worksheet every 30 seconds until you st
 
 ## Author
 
-Ranjith Kumar
+Ranjith Kumar.
